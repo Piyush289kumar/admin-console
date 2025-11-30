@@ -1,71 +1,94 @@
 // app/(auth)/login.tsx
+import React, { useState } from "react";
+import { View, Text } from "react-native";
+import { TextInput } from "react-native";
 
-import React from "react";
-import { View, Text } from "react-native"; // ⬅️ use RN components for Tailwind
-import { Input } from "@/components/ui/input";
+// BNA UI
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Text as BNAText } from "@/components/ui/text";
+import { View as BNAView } from "@/components/ui/view";
+import { useColor } from "@/hooks/useColor";
 
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const borderColor = useColor("border");
+  const backgroundColor = useColor("background");
+  const textColor = useColor("text");
+
   return (
-    <View className="flex-1 bg-black">
-      <View className="flex-1 justify-center px-6">
-        {/* App title */}
-        <Text className="text-3xl font-semibold text-blue-800 mb-12">
-          Welcome back 👋
-        </Text>
-        <Text className="text-base text-neutral-400 mb-8">
-          Sign in to continue to your dashboard.
-        </Text>
+    <View className="flex-1">
+      {/* Top 50% : Blue */}
+      <View className="flex-1 bg-blue-600" />
 
-        {/* Email */}
-        <View className="gap-2 mb-4">
-          <Text className="text-sm text-neutral-300">Email</Text>
-          <Input
-            placeholder="you@example.com"
-            keyboardType="email-address"
-            autoCapitalize="none"
-          />
-        </View>
+      {/* Bottom 50% : White */}
+      <View className="flex-1 bg-white" />
 
-        {/* Password */}
-        <View className="gap-2 mb-2">
-          <Text className="text-sm text-neutral-300">Password</Text>
-          <Input
-            placeholder="••••••••"
-            secureTextEntry
-          />
-        </View>
-
-        {/* Forgot password */}
-        <View className="items-end mb-6">
-          <Text className="text-xs text-blue-400">Forgot password?</Text>
-        </View>
-
-        {/* Primary button (BNA UI) */}
-        <Button className="h-12 rounded-2xl" /* if BNA Button supports className */>
-          <Text className="text-base font-medium text-white">
-            Sign in
-          </Text>
-        </Button>
-
-        {/* Divider */}
-        <View className="flex-row items-center my-8">
-          <View className="flex-1 h-px bg-neutral-800" />
-          <Text className="mx-3 text-xs text-neutral-500">OR CONTINUE WITH</Text>
-          <View className="flex-1 h-px bg-neutral-800" />
-        </View>
-
-        {/* Secondary auth providers could go here */}
-
-        {/* Bottom text */}
-        <View className="mt-4 flex-row justify-center">
-          <Text className="text-xs text-neutral-500">
-            Don't have an account?{" "}
-          </Text>
-          <Text className="text-xs text-blue-400 font-medium">
-            Sign up
-          </Text>
-        </View>
+      {/* Floating card */}
+      <View className="absolute inset-0 items-center justify-center px-6 max-w-lg mx-auto">
+        <Card>
+          <CardHeader>
+            <CardTitle>Sign In</CardTitle>
+            <CardDescription>
+              Enter your credentials to access your account.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <View style={{ gap: 16 }}>
+              <View>
+                <Text style={{ marginBottom: 8, fontWeight: "500" }}>
+                  Email
+                </Text>
+                <TextInput
+                  value={email}
+                  onChangeText={setEmail}
+                  placeholder="Enter your email"
+                  style={{
+                    borderWidth: 1,
+                    borderColor,
+                    borderRadius: 999,
+                    padding: 12,
+                    backgroundColor,
+                    color: textColor,
+                  }}
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                />
+              </View>
+              <View>
+                <Text style={{ marginBottom: 8, fontWeight: "500" }}>
+                  Password
+                </Text>
+                <TextInput
+                  value={password}
+                  onChangeText={setPassword}
+                  placeholder="Enter your password"
+                  secureTextEntry
+                  style={{
+                    borderWidth: 1,
+                    borderColor,
+                    borderRadius: 999,
+                    padding: 12,
+                    backgroundColor,
+                    color: textColor,
+                  }}
+                />
+              </View>
+            </View>
+          </CardContent>
+          <CardFooter>
+            <Button variant="outline">Cancel</Button>
+            <Button>Sign In</Button>
+          </CardFooter>
+        </Card>
       </View>
     </View>
   );

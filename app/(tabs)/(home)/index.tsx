@@ -21,7 +21,7 @@ export default function HomeScreen() {
         justifyContent: "center",
       }}
     >
-      <Text className="text-3xl font-bold text-red-700 mb-5">
+      <Text variant="title">
         Welcome back 👋
       </Text>
 
