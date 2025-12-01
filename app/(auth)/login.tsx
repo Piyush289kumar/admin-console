@@ -1,5 +1,4 @@
 // app/(auth)/login.tsx
-
 import React, { useState, useEffect } from "react";
 import {
   View,
@@ -9,12 +8,10 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-
 // Assets
 import Logo from "@/assets/images/logo.svg";
 import StartBg from "@/assets/images/bg/auth/star_bg.svg";
 import GoogleIcon from "@/assets/images/logo/google.svg";
-
 // BNA UI
 import { Button as BNAButton } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -22,8 +19,7 @@ import { Text as BNAText } from "@/components/ui/text";
 import { View as BNAView } from "@/components/ui/view";
 import { Input } from "@/components/ui/input";
 import { Checkbox as BNACheckbox } from "@/components/ui/checkbox";
-import { Lock, Mail } from "lucide-react-native";
-
+import { Eye, EyeOff, Lock, Mail } from "lucide-react-native";
 // Reanimated
 import Animated, {
   FadeIn,
@@ -35,27 +31,23 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { useRouter } from "expo-router";
-
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [checked, setChecked] = useState(false);
-
+  const [showPassword, setShowPassword] = useState(false);
   const emailError =
     email && !email.includes("@") ? "Please enter a valid email address" : "";
   const passwordError =
     password && password.length < 6
       ? "Password must be at least 6 characters"
       : "";
-
   // Background parallax animation
   const translateY = useSharedValue(0);
-
   useEffect(() => {
     translateY.value = withTiming(-20, { duration: 6000 });
   }, []);
-
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View className="flex-1">
@@ -73,10 +65,8 @@ export default function LoginPage() {
             />
           </View>
         </View>
-
         {/* Bottom white section */}
         <View className="flex-1 bg-[#F6F8FA] dark:bg-zinc-950" />
-
         {/* HEADER SECTION */}
         <Animated.View
           className="absolute top-20 inset-x-0 items-center"
@@ -86,21 +76,18 @@ export default function LoginPage() {
           <Animated.View entering={ZoomIn.duration(800)}>
             <Logo width={42} height={42} style={{ marginBottom: 20 }} />
           </Animated.View>
-
           <Animated.Text
             entering={FadeInUp.delay(200).duration(900)}
             className="!text-white text-5xl font-bold text-center px-10 leading-tight mt-5"
           >
             Sign in to your Account
           </Animated.Text>
-
           <Animated.View entering={FadeInUp.delay(400).duration(900)}>
             <BNAText variant="caption" className="!text-white mt-6">
               Enter your email and password to log in
             </BNAText>
           </Animated.View>
         </Animated.View>
-
         {/* FLOATING LOGIN CARD */}
         <Animated.View
           entering={FadeInDown.delay(300).springify().duration(900)}
@@ -123,7 +110,6 @@ export default function LoginPage() {
                     Continue with Google
                   </Text>
                 </Pressable>
-
                 {/* Separator */}
                 <View className="flex-row items-center my-6 px-2">
                   <View className="flex-1 h-px bg-gray-300 dark:bg-gray-700" />
@@ -132,7 +118,6 @@ export default function LoginPage() {
                   </Text>
                   <View className="flex-1 h-px bg-gray-300 dark:bg-gray-700" />
                 </View>
-
                 {/* INPUTS */}
                 <BNAView style={{ gap: 16 }}>
                   <Input
@@ -146,26 +131,32 @@ export default function LoginPage() {
                   <Input
                     placeholder="Enter password"
                     icon={Lock}
+                    secureTextEntry={!showPassword}
                     value={password}
                     onChangeText={setPassword}
                     error={passwordError}
-                    secureTextEntry
+                    rightComponent={
+                      <Pressable onPress={() => setShowPassword(!showPassword)}>
+                        {showPassword ? (
+                          <EyeOff size={20} color="#6b7280" />
+                        ) : (
+                          <Eye size={20} color="#6b7280" />
+                        )}
+                      </Pressable>
+                    }
                   />
-
                   <View className="flex-row items-center justify-between mt-3">
                     <BNACheckbox
                       checked={checked}
                       onCheckedChange={setChecked}
                       label="Remember Me"
                     />
-
                     <BNAText variant="link" style={{ color: "#4D81E7" }}>
                       Forget Password?
                     </BNAText>
                   </View>
                 </BNAView>
               </CardContent>
-
               {/* SIGN IN BUTTON */}
               <BNAView
                 style={{
@@ -185,7 +176,6 @@ export default function LoginPage() {
                   Log In
                 </BNAButton>
               </BNAView>
-
               {/* FOOTER */}
               <BNAView
                 style={{
@@ -211,7 +201,6 @@ export default function LoginPage() {
     </TouchableWithoutFeedback>
   );
 }
-
 // Styles
 const styles = StyleSheet.create({
   bgContainer: {
