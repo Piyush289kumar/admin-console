@@ -83,7 +83,7 @@ export default function RegisterPage() {
           </Animated.View>
           <Animated.Text
             entering={FadeInUp.delay(200).duration(900)}
-            className="!text-white text-5xl font-bold text-center px-10 leading-tight mt-5"
+            className="!text-white text-5xl font-bold text-center px-10 leading-tight mt-0"
           >
             Sign Up
           </Animated.Text>

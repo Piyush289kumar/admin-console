@@ -83,7 +83,7 @@ export default function LoginPage() {
             Sign in to your Account
           </Animated.Text>
           <Animated.View entering={FadeInUp.delay(400).duration(900)}>
-            <BNAText variant="caption" className="!text-white mt-6">
+            <BNAText variant="caption" className="!text-white mt-3">
               Enter your email and password to log in
             </BNAText>
           </Animated.View>
