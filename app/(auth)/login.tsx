@@ -27,8 +27,10 @@ import Animated, {
   useAnimatedStyle,
   withTiming,
 } from "react-native-reanimated";
+import { useRouter } from "expo-router";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [checked, setChecked] = useState(false);
@@ -104,7 +106,7 @@ export default function LoginPage() {
                 className="
                   flex-row items-center justify-center 
                   bg-white dark:bg-zinc-900
-                  border border-zinc-300 dark:border-zinc-800
+                  border border-zinc-100 dark:border-zinc-800
                   h-14 rounded-3xl gap-3
                   active:opacity-80 mx-1"
               >
@@ -186,7 +188,11 @@ export default function LoginPage() {
               }}
             >
               <BNAText variant="caption">Don’t have an account?</BNAText>
-              <BNAText variant="link" style={{ color: "#4D81E7" }}>
+              <BNAText
+                variant="link"
+                style={{ color: "#4D81E7" }}
+                onPress={() => router.push("/(auth)/register")}
+              >
                 Sign Up
               </BNAText>
             </BNAView>
