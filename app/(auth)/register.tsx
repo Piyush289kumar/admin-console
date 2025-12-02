@@ -206,7 +206,7 @@ export default function RegisterPage() {
                   textStyle={{ color: "white" }}
                   onPress={onRegister}
                 >
-                  Log In
+                  Sign Up
                 </BNAButton>
               </BNAView>
               {/* FOOTER */}

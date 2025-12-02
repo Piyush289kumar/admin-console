@@ -1,6 +1,7 @@
 // services/auth.util.ts
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { decode as atob } from "base-64"; // ✅ install: npm i base-64
 
 // KEY NAME (consistent + easy to change)
 const TOKEN_KEY = "authToken";
@@ -33,23 +34,35 @@ export async function clearToken(): Promise<void> {
   }
 }
 
-// Decode JWT (safe, no crash)
-export function decodeToken(token: string) {
-  try {
-    const base64 = token.split(".")[1];
-    if (!base64) return null;
+// ✅ Proper JWT decode in RN (handles base64url)
+export function decodeToken(token: string | null) {
+  if (!token) return null;
 
-    const decoded = JSON.parse(
-      Buffer.from(base64, "base64").toString("utf8")
+  try {
+    const base64Url = token.split(".")[1];
+    if (!base64Url) return null;
+
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split("")
+        .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+        .join("")
     );
 
+    const decoded = JSON.parse(jsonPayload);
+
+    // Optional debug
+    console.log("📜 Decoded Token:", decoded);
+
     return decoded;
-  } catch {
+  } catch (e) {
+    console.log("❌ Failed to decode token:", e);
     return null;
   }
 }
 
-// Check Authentication
 export async function isAuthenticated(): Promise<boolean> {
   const token = await getToken();
   if (!token) return false;
