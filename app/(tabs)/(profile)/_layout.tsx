@@ -1,3 +1,5 @@
+// app/(tabs)/(profile)/_layout.tsx
+
 import { Stack } from 'expo-router';
 import { Platform, useColorScheme } from 'react-native';
 import { isLiquidGlassAvailable } from 'expo-glass-effect';
@@ -31,10 +33,10 @@ export default function ProfileLayout() {
       <Stack.Screen
         name='index'
         options={{
-          title: 'Profile',
+          title: 'Settings',
           headerTitle: () =>
             Platform.OS === 'android' ? (
-              <Text variant='heading'>Profile</Text>
+              <Text variant='heading'>Settings</Text>
             ) : undefined,
         }}
       />
