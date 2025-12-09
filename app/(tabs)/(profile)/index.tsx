@@ -1,6 +1,7 @@
 // app/(tabs)/(profile)/index.tsx
 
 import { SearchBarSuggestions } from "@/components/search/searchbar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
 import { Icon } from "@/components/ui/icon";
 import { ModeToggle } from "@/components/ui/mode-toggle";
@@ -8,6 +9,7 @@ import { ScrollView } from "@/components/ui/scroll-view";
 import { Text } from "@/components/ui/text";
 import { View } from "@/components/ui/view";
 import { useColor } from "@/hooks/useColor";
+import { PRIMARY_COLOR } from "@/theme/globals";
 import { Code, Eye, Palette, Settings } from "lucide-react-native";
 
 export default function ProfileScreen() {
@@ -26,7 +28,7 @@ export default function ProfileScreen() {
         alignItems: "center",
       }}
     >
-      <View style={{width:"100%"}}>
+      <View style={{ width: "100%" }}>
         <SearchBarSuggestions />
       </View>
       <View
@@ -37,10 +39,34 @@ export default function ProfileScreen() {
       >
         <Card>
           <CardContent>
-            <Text>
-              A simple card with just content. Perfect for displaying basic
-              information or messages.
-            </Text>
+            <View 
+            style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+              <Avatar
+                size={64}
+                style={{
+                  borderWidth: 1,
+                  borderColor: PRIMARY_COLOR,
+                  shadowColor: "#3b82f6",
+                  shadowOffset: { width: 0, height: 4 },
+                  shadowOpacity: 0.3,
+                  shadowRadius: 8,
+                  elevation: 8,
+                }}
+              >
+                <AvatarImage
+                  source={{
+                    uri: "https://avatars.githubusercontent.com/u/99088394?v=4",
+                  }}
+                />
+                <AvatarFallback>AB</AvatarFallback>
+              </Avatar>
+
+               <View 
+            style={{ flexDirection: 'column', alignItems: 'center', gap: 10 }}>
+              <Text variant="subtitle">Piyush Kumar Raikwar</Text>
+              <Text variant="subtitle">Piyush Kumar Raikwar</Text>
+            </View>
+            </View>
           </CardContent>
         </Card>
       </View>

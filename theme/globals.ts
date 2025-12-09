@@ -5,3 +5,7 @@ export const BORDER_RADIUS = 12;
 export const CORNERS = 999;
 export const PADDING_HORIZONTAL = 12;
 export const MARGIN_HORIZONTAL = 8;
+
+
+/* Theme Color */
+export const PRIMARY_COLOR = "#FFF";
