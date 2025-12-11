@@ -4,25 +4,12 @@ import { SearchBarSuggestions } from "@/components/search/searchbar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Icon } from "@/components/ui/icon";
-import { ModeToggle } from "@/components/ui/mode-toggle";
 import { ScrollView } from "@/components/ui/scroll-view";
 import { Text } from "@/components/ui/text";
 import { View } from "@/components/ui/view";
-import { useColor } from "@/hooks/useColor";
-import {
-  BORDER_RADIUS,
-  CORNERS,
-  PADDING_HORIZONTAL,
-  PRIMARY_COLOR,
-} from "@/theme/globals";
-import { Code, Eye, Palette, QrCode, Settings } from "lucide-react-native";
+import { PRIMARY_COLOR } from "@/theme/globals";
 
 export default function ProfileScreen() {
-  const card = useColor("card");
-  const border = useColor("border");
-  const primary = useColor("primary");
-
   return (
     <ScrollView
       style={{ flex: 1 }}
